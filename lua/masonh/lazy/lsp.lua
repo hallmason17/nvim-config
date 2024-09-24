@@ -16,6 +16,7 @@ return {
 	config = function()
 		local cmp = require("cmp")
 		local cmp_lsp = require("cmp_nvim_lsp")
+		local lspconfig = require("lspconfig")
 		local capabilities = vim.tbl_deep_extend(
 			"force",
 			{},
@@ -34,10 +35,27 @@ return {
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
-					require("lspconfig")[server_name].setup({
+					lspconfig[server_name].setup({
 						capabilities = capabilities,
 					})
 				end,
+			},
+		})
+
+		lspconfig.htmx.setup({
+			capabilities = capabilities,
+			filetypes = { "templ", "html" },
+		})
+
+		lspconfig.tailwindcss.setup({
+			capabilities = capabilities,
+			filetypes = { "templ", "html" },
+			settings = {
+				tailwindCSS = {
+					includeLanguages = {
+						templ = "html",
+					},
+				},
 			},
 		})
 
@@ -60,6 +78,13 @@ return {
 			}, {
 				{ name = "buffer" },
 			}),
+		})
+
+		cmp.setup.filetype({ "sql" }, {
+			sources = {
+				{ name = "vim-dadbod-completion" },
+				{ name = "buffer" },
+			},
 		})
 
 		vim.diagnostic.config({
