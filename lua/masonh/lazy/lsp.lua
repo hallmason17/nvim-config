@@ -30,8 +30,8 @@ return {
 			ensure_installed = {
 				"lua_ls",
 				"rust_analyzer",
-				"gopls",
-				"hls",
+				"pyright",
+				"clangd",
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
@@ -42,9 +42,39 @@ return {
 			},
 		})
 
+		lspconfig.hls.setup({
+			capabilities = capabilities,
+			filetypes = { "haskell", "lhaskell", "cabal" },
+		})
+
+		--[[
 		lspconfig.htmx.setup({
 			capabilities = capabilities,
 			filetypes = { "templ", "html" },
+		})
+
+		lspconfig.fortls.setup({
+			capabilities = capabilities,
+			cmd = {
+				"/Users/masonhall/.local/share/nvim/mason/bin/fortls",
+				"--lowercase_intrinsics",
+				"--hover_signature",
+				"--hover_language=fortran",
+				"--use_signature_help",
+			},
+			filetypes = { "fortran" },
+			--			root_dir = vim.fs.root(0, ".git"),
+		})
+        --]]
+
+		lspconfig.ocamllsp.setup({
+			capabilities = capabilities,
+			cmd = { "/Users/masonhall/.opam/default/bin/ocamllsp" },
+		})
+
+		lspconfig.elixirls.setup({
+			capabilities = capabilities,
+			cmd = { "/Users/masonhall/.local/share/nvim/mason/bin/elixir-ls" },
 		})
 
 		lspconfig.tailwindcss.setup({

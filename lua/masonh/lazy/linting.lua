@@ -6,12 +6,16 @@ return {
 		local lint = require("lint")
 
 		lint.linters_by_ft = {
-			c = { "cspell", "cpplint" },
-			cpp = { "cspell", "cpplint" },
+			c = {},
+			cpp = { "cpplint" },
 			go = { "golangcilint" },
 			haskell = { "hlint" },
-			typescript = { "eslint_d" },
-			python = { "ruff", "mypy" },
+			python = { "mypy", "ruff" },
+			rust = { "clippy" },
+			typescript = { "biomejs", "eslint_d" },
+			json = { "jsonlint" },
+			yaml = { "yamllint" },
+			lua = { "luac" },
 		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
