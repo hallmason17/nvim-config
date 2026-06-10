@@ -4,9 +4,6 @@ return {
         name = "plenary"
     },
     {
-        "christoomey/vim-tmux-navigator"
-    },
-    {
         "folke/which-key.nvim",
         event = "VeryLazy",
         init = function()
